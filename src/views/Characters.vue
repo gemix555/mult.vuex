@@ -4,7 +4,7 @@
       <h1>Characters</h1>
     </div>
     
-     <div class="card col-3 m-2"   
+     <div class="card col-4 m-2"   
           v-for="character in allCharacters" :key="character.id"
       >
       <router-link tag="a" :to="'/characters/'+ character.id">
@@ -45,13 +45,30 @@
   </div>
 </template>
 <script>
-import {mapGetters, mapActions} from "vuex"
+
 export default {
-  name: 'app',
-  computed: mapGetters(["allCharacters"]),
-  methods: mapActions(["fetchCharacters"]),
-  async mounted() {
-    this.fetchCharacters()
+  name: 'characters',
+  data() {
+    return {
+      allCharacters:[
+        { id: 1,name: "Rick Sanchez",status: "Alive",species: "Human",type: "",gender: "Male",
+          origin: {name: "Earth (C-137)",url: "https://rickandmortyapi.com/api/location/1"},
+          location: {name: "Earth (Replacement Dimension)",url: "https://rickandmortyapi.com/api/location/20"},
+          image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+      },
+      { id: 2,name: "Rick Sanchez",status: "Alive",species: "Human",type: "",gender: "Male",
+          origin: {name: "Earth (C-137)",url: "https://rickandmortyapi.com/api/location/1"},
+          location: {name: "Earth (Replacement Dimension)",url: "https://rickandmortyapi.com/api/location/20"},
+          image: "https://rickandmortyapi.com/api/character/avatar/1.jpeg",
+      },
+      
+      ]
+        
+       
+    }
+  },
+  created() {
+    this.$store.dispatch('fetchCharacters');
   }
 }
 </script>
